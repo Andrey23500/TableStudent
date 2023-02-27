@@ -1,0 +1,69 @@
+<div class="container">
+  <form novalidate formGroup="formStudent">
+    <h2 *ngIf="data; else elseBlock">Edit student</h2>
+    <ng-template #elseBlock>
+      <h2>Add student</h2>
+    </ng-template>
+
+    <div class="formItem">
+      <mat-form-field appearance="legacy">
+        <mat-label>Student name</mat-label>
+        <input formControlName="name" matInput />
+        <mat-error *ngIf="formStudent.get('name')?.hasError('required')">
+          Student name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="formItem">
+      <mat-form-field appearance="legacy">
+        <mat-label>Surname</mat-label>
+        <input formControlName="surname" matInput />
+        <mat-error *ngIf="formStudent.get('surname')?.hasError('required')">
+          Student surname is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="formItem">
+      <mat-form-field appearance="legacy">
+        <mat-label>Student birthday</mat-label>
+        <input formControlName="birthday" matInput />
+        <mat-error
+          *ngIf="formStudent.get('birthday')?.hasError('required')"
+        >
+          Student birthday<strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="formItem">
+      <mat-form-field class="example-full-width" appearance="legacy">
+        <mat-label>Score student</mat-label>
+        <textarea matInput formControlName="score"></textarea>
+        <mat-error
+          *ngIf="formStudent.get('score')?.hasError('required')"
+        >
+          Score student is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-dialog-actions>
+      <button
+        mat-raised-button
+        *ngIf="data; else elseAdd"
+        type="submit"
+        color="primary"
+      >
+        Edit
+      </button>
+      <ng-template #elseAdd>
+        <button mat-raised-button type="submit" color="primary">Add</button>
+      </ng-template>
+      <button mat-stroked-button type="button" (click)="dialogRef.close()">
+        Cancel
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

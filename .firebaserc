@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "studenttable-738ea": {
+      "hosting": {
+        "table-student": [
+          "studenttable-738ea"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "studenttable-738ea"
+  }
+}

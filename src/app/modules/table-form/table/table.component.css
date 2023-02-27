@@ -1,0 +1,20 @@
+.container {
+  padding: 30px 40px 10px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.mat-elevation-z8 {
+  margin: auto;
+  width: 100%;
+  padding: 0px 40px;
+}
+
+.mat-elevation-z8 td,
+.mat-elevation-z8 th {
+  text-align: center;
+}
+.btn{
+  margin: 2px;
+}
