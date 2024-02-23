@@ -1,9 +1,14 @@
 .container {
-  min-width: 200px;
+  min-width: 25rem;
+  margin: 0 auto;
 }
 
 .formItem {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
+}
+
+.formItem mat-form-field {
+  width: 100%;
 }
 
 .form {

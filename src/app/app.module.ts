@@ -6,31 +6,36 @@ import { AppComponent } from './app.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { provideStorage, getStorage } from '@angular/fire/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableFormModule } from './modules/table-form/table-form.module';
 import { routing } from "./app.routing";
-import { StudentService } from './service/student.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { AddEditComponent } from './components/add-edit/add-edit.component';
 import { DeleteComponent } from './components/delete/delete.component';
 import { MaterialModule } from './modules/material/material.module';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddEditComponent,
-    DeleteComponent
+    DeleteComponent,
+    NotFoundPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     TableFormModule,
     MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
     routing,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatNativeDateModule
   ],
   entryComponents: [
     AddEditComponent,

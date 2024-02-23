@@ -1,20 +1,37 @@
 .container {
-  padding: 30px 40px 10px 40px;
-  max-width: 1200px;
+  padding: 2rem 3rem 1rem 3rem;
+  max-width: 90rem;
   margin: 0 auto;
   justify-content: center;
+}
+
+.demo-button-container button {
+  margin-bottom: 1rem;
 }
 
 .mat-elevation-z8 {
   margin: auto;
   width: 100%;
-  padding: 0px 40px;
+  padding: 0 3rem;
 }
 
 .mat-elevation-z8 td,
 .mat-elevation-z8 th {
   text-align: center;
 }
-.btn{
-  margin: 2px;
+
+.btn {
+  margin: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .btn {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .icon {
+    font-size: 1.4rem;
+    margin-top: -0.5rem;
+  }
 }

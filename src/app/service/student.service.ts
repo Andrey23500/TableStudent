@@ -29,7 +29,6 @@ export class StudentService {
       });
   }
   deleteStudent(id: string): void {
-    console.log(id)
     this.firestore.collection("Students").doc(id).delete();
   }
   editStudent(student: Student): void {

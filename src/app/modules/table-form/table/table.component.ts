@@ -11,7 +11,6 @@ import { MatTableDataSource } from "@angular/material/table";
 import { RxUnsubscribe } from "src/app/rx-unsubscribe";
 import { MatDialog } from "@angular/material/dialog";
 import { DeleteComponent } from "src/app/components/delete/delete.component";
-import { Observable, takeUntil } from "rxjs";
 import { AddEditComponent } from "src/app/components/add-edit/add-edit.component";
 
 @Component({
@@ -22,7 +21,7 @@ import { AddEditComponent } from "src/app/components/add-edit/add-edit.component
 })
 export class TableComponent extends RxUnsubscribe implements OnInit {
   students!: MatTableDataSource<Student>;
-  displayedColumns: string[] = ['position', 'name', 'surname', 'birthday', 'score', 'delete'];
+  displayedColumns: string[] = ['position', 'name', 'surname', 'dateExam', 'score', 'delete'];
   constructor(
     private service: StudentService,
     public router: Router,
@@ -39,10 +38,15 @@ export class TableComponent extends RxUnsubscribe implements OnInit {
     });
   }
 
-  deleteStudent(student: Student): void {
-    let dialogRef = this.dialogMode.open(DeleteComponent, {
-      data: 'student',
+  addStudent(): void {
+    let dialogRef = this.dialogMode.open(AddEditComponent, {});
+    dialogRef.afterClosed().subscribe((student) => {
+      if (student) this.service.addStudent(student);
     });
+  }
+
+  deleteStudent(student: Student): void {
+    let dialogRef = this.dialogMode.open(DeleteComponent, {});
     dialogRef.afterClosed().subscribe((res) => {
       if (res) this.service.deleteStudent(student.id);
     });
@@ -52,23 +56,13 @@ export class TableComponent extends RxUnsubscribe implements OnInit {
     let dialogRef = this.dialogMode.open(AddEditComponent, {
       data: student,
     });
-    dialogRef.afterClosed().subscribe((res) => {
-      console.log(`Dialog res: ${res}`)
-      if (res) {
-        // res.id = service.id;
-        // this.service.add(res)
-      }
+    dialogRef.afterClosed().subscribe((student) => {
+      if (student) this.service.editStudent(student);
     });
   }
 
-  addStudent(): void {
-    let dialogRef = this.dialogMode.open(AddEditComponent, {
-      data: 'student',
-    });
-    dialogRef.afterClosed().subscribe((student) => {
-      if (student) this.service.addStudent(student);
-    });
-  }
+
+
 
 
   isServer: boolean = false;
@@ -76,29 +70,8 @@ export class TableComponent extends RxUnsubscribe implements OnInit {
   isAskSort: boolean = true;
   findedStudents: Array<number> = [];
   deleteStudents: Array<number> = [];
-  popUp = {
-    name: "",
-    surname: "",
-    isShow: false,
-    message: "",
-    id: -1,
-  };
 
-  showPopUp(name: string, surname: string, id: number): void {
-    this.popUp.name = name;
-    this.popUp.surname = surname;
-    this.popUp.id = id;
-    this.popUp.message = `Удалить студента ${surname} ${name}?`;
-    this.popUp.isShow = true;
-  }
-  hide(): void {
-    this.popUp.isShow = false;
-  }
 
-  // deleteStudent(id: number): void {
-  //   // this.service.delStudent(id);
-  //   this.popUp.isShow = false;
-  // }
 
   // sort(property: keyof Student): void {
   //   if (this.isAskSort) {

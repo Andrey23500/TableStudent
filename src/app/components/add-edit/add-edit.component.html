@@ -1,5 +1,5 @@
 <div class="container">
-  <form novalidate formGroup="formStudent">
+  <form class="form" novalidate [formGroup]="formStudent" (ngSubmit)="submit()">
     <h2 *ngIf="data; else elseBlock">Edit student</h2>
     <ng-template #elseBlock>
       <h2>Add student</h2>
@@ -8,9 +8,15 @@
     <div class="formItem">
       <mat-form-field appearance="legacy">
         <mat-label>Student name</mat-label>
-        <input formControlName="name" matInput />
+        <input type="text" name="name" formControlName="name" matInput />
         <mat-error *ngIf="formStudent.get('name')?.hasError('required')">
-          Student name is <strong>required</strong>
+          Student name is required
+        </mat-error>
+        <mat-error *ngIf="formStudent.get('name')?.hasError('pattern')">
+          Student name must contain only characters
+        </mat-error>
+        <mat-error *ngIf="formStudent.get('name')?.hasError('maxLength')">
+          Maximum length of student name 20 characters
         </mat-error>
       </mat-form-field>
     </div>
@@ -18,48 +24,51 @@
     <div class="formItem">
       <mat-form-field appearance="legacy">
         <mat-label>Surname</mat-label>
-        <input formControlName="surname" matInput />
+        <input type="text" name="surname" formControlName="surname" matInput />
         <mat-error *ngIf="formStudent.get('surname')?.hasError('required')">
-          Student surname is <strong>required</strong>
+          Student surname is required
+        </mat-error>
+        <mat-error *ngIf="formStudent.get('surname')?.hasError('pattern')">
+          Student surname must contain only characters
+        </mat-error>
+        <mat-error *ngIf="formStudent.get('surname')?.hasError('maxLength')">
+          Maximum length of student surname 50 characters
         </mat-error>
       </mat-form-field>
     </div>
 
     <div class="formItem">
       <mat-form-field appearance="legacy">
-        <mat-label>Student birthday</mat-label>
-        <input formControlName="birthday" matInput />
-        <mat-error
-          *ngIf="formStudent.get('birthday')?.hasError('required')"
-        >
-          Student birthday<strong>required</strong>
+        <mat-label>Student exam day</mat-label>
+        <input matInput [matDatepicker]="dp" formControlName="dateExam" >
+        <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+        <mat-error *ngIf="formStudent.get('dateExam')?.hasError('required')">
+          Student exam day required
         </mat-error>
       </mat-form-field>
     </div>
 
     <div class="formItem">
       <mat-form-field class="example-full-width" appearance="legacy">
-        <mat-label>Score student</mat-label>
-        <textarea matInput formControlName="score"></textarea>
-        <mat-error
-          *ngIf="formStudent.get('score')?.hasError('required')"
-        >
-          Score student is <strong>required</strong>
+        <mat-label>Student score </mat-label>
+        <input type="text" name="score" matInput formControlName="score">
+        <mat-error *ngIf="formStudent.get('score')?.hasError('required')">
+          Score is required
+        </mat-error>
+        <mat-error *ngIf="formStudent.get('score')?.hasError('pattern')">
+          Value score should be in the range 1-5
         </mat-error>
       </mat-form-field>
     </div>
 
     <mat-dialog-actions>
-      <button
-        mat-raised-button
-        *ngIf="data; else elseAdd"
-        type="submit"
-        color="primary"
-      >
+      <button type="submit" [disabled]="formStudent.invalid" mat-raised-button *ngIf="data; else elseAdd"
+        color="primary">
         Edit
       </button>
       <ng-template #elseAdd>
-        <button mat-raised-button type="submit" color="primary">Add</button>
+        <button type="submit" [disabled]="formStudent.invalid" mat-raised-button color="primary">Add</button>
       </ng-template>
       <button mat-stroked-button type="button" (click)="dialogRef.close()">
         Cancel

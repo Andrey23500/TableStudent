@@ -3,7 +3,6 @@
  * Avoids having to keep up with so many subscriptions
  */
 import { Injectable, OnDestroy } from "@angular/core";
-
 import { Subject } from "rxjs";
 
 @Injectable({
