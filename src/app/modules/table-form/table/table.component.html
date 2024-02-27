@@ -1,44 +1,67 @@
 <div class="container">
-  <div class="form">
-    <div class="search">
-      <label for="search">Поиск</label>
-      <input #input id="search" type="text" placeholder="Введите имя и/или фамилию" />
-    </div>
-    <div class="filter">
-      <div class="filter-data">
-        <input type="text" placeholder="Начальная дата" #dataMin date [value]="dataMin.placeholder" />
-        <input type="text" placeholder="Конечная дата" #dataMax date [value]="dataMax.placeholder" />
-        <button class="btn">
-          Фильтрация по дате
-        </button>
-      </div>
-      <div class="filter-score">
-        <input type="text" placeholder="Минимальный балл" #minScore />
-        <input type="text" placeholder="Максимальный балл" #maxScore />
-        <button class="btn">
-          Фильтрация по баллам
-        </button>
-      </div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Filters</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
+      <form class="form" [formGroup]="filterForm">
+        <mat-form-field class="search">
+          <mat-label>Search student</mat-label>
+          <input #studentName matInput type="text" (keyup)="nameFilter(studentName.value)" formControlName="name">
+        </mat-form-field>
+        <table cellspacing="0" class="fields">
+          <tr>
+            <td>
+              <mat-form-field>
+                <mat-label>Start date exam</mat-label>
+                <input [matDatepicker]="dp1" matInput #dateMin (dateChange)="dateFilter(dateMin.value, dateMax.value)" formControlName="dateMin">
+                <mat-datepicker-toggle matIconSuffix [for]="dp1"></mat-datepicker-toggle>
+                <mat-datepicker #dp1></mat-datepicker>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field>
+                <mat-label>End date exam</mat-label>
+                <input [matDatepicker]="dp2" matInput #dateMax (dateChange)="dateFilter(dateMin.value, dateMax.value)" formControlName="dateMax">
+                <mat-datepicker-toggle matIconSuffix [for]="dp2"></mat-datepicker-toggle>
+                <mat-datepicker #dp2></mat-datepicker>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field>
+                <mat-label>Min score</mat-label>
+                <input type="text" matInput placeholder="" #minScore value="0"
+                  (keyup)="scoreFilter(minScore.value,maxScore.value)" formControlName="minScore">
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field>
+                <mat-label>Max score</mat-label>
+                <input type="text" matInput placeholder="" #maxScore value="100"
+                  (keyup)="scoreFilter(minScore.value,maxScore.value)" formControlName="maxScore">
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <mat-slide-toggle class="valid_score" min="0" max="1">Valid score</mat-slide-toggle>
+            <button mat-raised-button color="primary" (click)="clearFilters()">Clear filters</button>
+          </tr>
+        </table>
+      </form>
+    </mat-card-actions>
+  </mat-card>
 
-      <button class="btn">Сброс фильтров</button>
-    </div>
-    <div class="score">
-      <p>Оценка меньше трех</p>
-      <span class="toggle-bg">
-        <input type="range" id="toggle" min="0" max="1" (change)="range = !range" />
-      </span>
-    </div>
-  </div>
 
-
-  <h2>Student Table</h2>
+  <h1 class="title">Student Table</h1>
   <div class="demo-button-container">
     <button mat-raised-button (click)="addStudent()">
       Add student
     </button>
   </div>
 
-  <table mat-table [dataSource]="students" class="mat-elevation-z8">
+  <table mat-table [dataSource]="studentsTable" class="mat-elevation-z8">
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef>№</th>
       <td mat-cell *matCellDef="let student; let i = index;">{{i +1}}</td>

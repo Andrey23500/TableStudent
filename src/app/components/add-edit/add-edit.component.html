@@ -40,7 +40,7 @@
     <div class="formItem">
       <mat-form-field appearance="legacy">
         <mat-label>Student exam day</mat-label>
-        <input matInput [matDatepicker]="dp" formControlName="dateExam" >
+        <input matInput [matDatepicker]="dp" formControlName="dateExam">
         <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
         <mat-datepicker #dp></mat-datepicker>
         <mat-error *ngIf="formStudent.get('dateExam')?.hasError('required')">
@@ -50,14 +50,14 @@
     </div>
 
     <div class="formItem">
-      <mat-form-field class="example-full-width" appearance="legacy">
+      <mat-form-field appearance="legacy">
         <mat-label>Student score </mat-label>
         <input type="text" name="score" matInput formControlName="score">
         <mat-error *ngIf="formStudent.get('score')?.hasError('required')">
           Score is required
         </mat-error>
         <mat-error *ngIf="formStudent.get('score')?.hasError('pattern')">
-          Value score should be in the range 1-5
+          Value score should be in the range 1-100
         </mat-error>
       </mat-form-field>
     </div>

@@ -4,7 +4,7 @@ import { ConvertDate } from "./table/pipes";
 import { HttpClientModule } from "@angular/common/http";
 import { TableComponent } from "./table/table.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { CaptionDirective, DateDirective } from "./table/directives";
+import { CaptionDirective } from "./table/directives";
 import { RouterModule } from "@angular/router";
 import { StudentService } from "src/app/service/student.service";
 import { MaterialModule } from "../material/material.module";
@@ -12,7 +12,6 @@ import { MaterialModule } from "../material/material.module";
 @NgModule({
   declarations: [
     CaptionDirective,
-    DateDirective,
     TableComponent,
     ConvertDate
   ],
@@ -26,6 +25,6 @@ import { MaterialModule } from "../material/material.module";
   ],
   exports: [TableComponent],
 
-  providers: [StudentService],
+  providers: [StudentService, ConvertDate],
 })
 export class TableFormModule { }

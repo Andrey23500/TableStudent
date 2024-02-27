@@ -18,19 +18,3 @@ export class CaptionDirective {
     this.render.removeClass(this.el.nativeElement, "caption");
   }
 }
-
-@Directive({
-  selector: "[date]",
-})
-export class DateDirective {
-  @Input() value: string = "";
-  val!: string;
-  constructor(private el: ElementRef) {}
-  @HostListener("mouseenter") onMouseEnter(): void {
-    this.val = this.value;
-    this.el.nativeElement.placeholder = "Month dd, yyyy";
-  }
-  @HostListener("mouseleave") onMouseLeave(): void {
-    this.el.nativeElement.placeholder = this.val;
-  }
-}

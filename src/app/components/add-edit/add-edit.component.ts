@@ -26,12 +26,11 @@ export class AddEditComponent extends RxUnsubscribe implements OnInit {
     name: new FormControl(null, [Validators.required, Validators.maxLength(20), Validators.pattern('^[a-zA-Z ]*$')]),
     surname: new FormControl(null, [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]),
     dateExam: new FormControl(null, [Validators.required]),
-    score: new FormControl(null, [Validators.required, Validators.pattern("^[1-5]*$")]),
+    score: new FormControl(null, [Validators.required, Validators.pattern("[1-9]{1}$|^[1-9]{1}[0-9]{1}$|^100")]),
     id: new FormControl(null),
   });
 
   showInputs(data: Student): void {
-
     this.formStudent.get("name")?.setValue(data.name);
     this.formStudent.get("surname")?.setValue(data.surname);
     this.formStudent.get("dateExam")?.setValue(new Date(Number(JSON.stringify(data.dateExam).split(",")[0].split(":")[1]) * 1000));

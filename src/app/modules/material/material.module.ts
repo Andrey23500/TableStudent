@@ -17,6 +17,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatSortModule } from "@angular/material/sort";
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCardModule } from '@angular/material/card';
 
 const itemsMaterial = [
   MatIconModule,
@@ -29,6 +31,7 @@ const itemsMaterial = [
   MatFormFieldModule,
   MatInputModule,
   MatDatepickerModule,
+  MatSlideToggleModule,
   MatCheckboxModule,
   MatTabsModule,
   MatListModule,
@@ -36,6 +39,7 @@ const itemsMaterial = [
   MatSnackBarModule,
   MatSortModule,
   MatProgressBarModule,
+  MatCardModule,
 ];
 @NgModule({
   declarations: [],
