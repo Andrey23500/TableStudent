@@ -50,6 +50,10 @@
   margin: 1rem 0;
 }
 
+.background__valid {
+  background-color: rgba(114, 230, 139, 0.5);
+}
+
 @media (max-width: 768px) {
   .btn {
     width: 2rem;

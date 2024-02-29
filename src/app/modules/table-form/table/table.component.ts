@@ -23,6 +23,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class TableComponent extends RxUnsubscribe implements OnInit {
   studentsTable!: MatTableDataSource<Student>;
   clearStudentsTable!: MatTableDataSource<Student>;
+  validScore: boolean = false;
   filterForm = new FormGroup({
     name: new FormControl(''),
     dateMin: new FormControl(''),
@@ -96,6 +97,11 @@ export class TableComponent extends RxUnsubscribe implements OnInit {
   clearFilters(): void {
     this.studentsTable.data = this.clearStudentsTable.data;
     this.filterForm.reset();
+    this.validScore = false;
+  }
+
+  isvalidScore(): void {
+    this.validScore = !this.validScore;
   }
 }
 
